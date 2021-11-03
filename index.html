@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Cronometer</title>
+</head>
+<body>
+    <div class="container">
+        <h1 class="h1">Cronometer</h1>
+        <div class="view">
+            <span id="time">00 00 00</span>
+            <span id="hundredthOfSecond">000</span>
+        </div>
+        <div class="actions">
+            <button class="reset"><img src="./images/rotate-ccw.svg" alt="Reset" onclick="resetTimer()"></button>
+            <button class="start" id="start"><img src="./images/play.svg" alt="Reset" onclick="startTimer()"></button>
+            <button class="pause" id="pause"><img src="./images/pause.svg" alt="Reset" onclick="pauseTimer()"></button>
+        </div>
+    </div>
+    <script>
+
+        var count = 0;
+        var hundredth = 0;
+        var seconds = 0;
+        var minutes = 0;
+        var hours = 0;
+        
+        var time = document.getElementById("time");
+        var hundredthOfSecond = document.getElementById("hundredthOfSecond");
+        var start = document.getElementById("start");
+        var pause = document.getElementById("pause");
+
+        var interval;
+
+        const startTimer = () => {
+            interval = setInterval(function()
+            {
+                start.style.display = "none";
+                pause.style.display = "inline";
+
+                count += 1;
+
+                hundredth = count  % 100;
+
+                seconds = Math.floor( ( count * 100 ) / 10000 );
+
+                minutes = Math.floor(seconds / 60);
+
+                hours = Math.floor( minutes / 60 );
+
+                time.innerHTML = `${hours < 10 ? `0${hours}` : hours} ${ minutes % 60 < 10 ? `0${minutes % 60}` : minutes % 60} ${seconds % 60 < 10 ? `0${seconds % 60}` : seconds % 60}`;
+                hundredthOfSecond.innerHTML = `${hundredth < 10 ? `0${hundredth}` : hundredth}`;
+                
+            }, 10);
+        };
+
+        const pauseTimer = () => {
+            start.style.display = "inline";
+            pause.style.display = "none";
+            clearInterval(interval);
+        }
+
+        const resetTimer = () => {
+            count = 0;
+            hundredth = 0;
+            seconds = 0;
+            minutes = 0;
+            hours = 0;
+
+            time.innerHTML = `00 00 00`;
+            hundredthOfSecond.innerHTML = `000`;
+        }
+        
+    </script>
+</body>
+</html>
