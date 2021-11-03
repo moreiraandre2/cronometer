@@ -3,4 +3,4 @@
 Projeto simples para treinar o uso de tempo.
 Unidades de medidas usadas foram centésimos, segundos, minutos e horas.
 
-![Screenshot](screenshot.png)
+![Screenshot](screenshot.PNG)
